@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:45:57 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/12 14:23:24 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:18:24 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int             ft_list_size(t_list *list)
 
 	i = 0;
 	current = list;
-	while (current)
+	while (current && current->data)
 	{
 		i++;
 		current = current->next;
@@ -82,20 +82,6 @@ t_list  *ft_list_at(t_list *begin_list, unsigned int nbr)
 		i++;
 	}
 	return (list);
-}
-
-void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
-{
-	t_list   *el;
-
-	if (!begin_list)
-		return ;
-	el = begin_list;
-	while (el)
-	{
-		f(el->data);
-		el = el->next;
-	}
 }
 
 t_list  *ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)())

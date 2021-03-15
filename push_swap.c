@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:57:54 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/12 17:13:33 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:24:18 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,94 @@
 ** into a linked list, which i'll be able to modify at will.
 */
 
+// void		test(t_list **stack_a, t_list **stack_b)
+// {
+// 	ft_printf(RESET CYAN"---------------\n");
+// 	ft_printf(RESET RED"A : Before swap \n");
+// 	ft_list_foreach(*stack_a, print_linked_list);
+// 	ft_printf(RESET CYAN"---------------\n");
+// 	ft_printf(RESET BLUE"B : Before swap \n");
+// 	ft_list_foreach(*stack_b, print_linked_list);
+// 	sort(stack_a, stack_b);
+// 	ft_printf(RESET CYAN"---------------\n");
+// 	ft_printf(RESET RED"A : After swap \n");
+// 	ft_list_foreach(*stack_a, print_linked_list);
+// 	ft_printf(RESET CYAN"---------------\n");
+// 	ft_printf(RESET BLUE"B : After swap \n");
+// 	ft_list_foreach(*stack_b, print_linked_list);
+// 	ft_printf(RESET CYAN"---------------\n");
+// }
+
+void    print_both(t_list *stack_a, t_list *stack_b)
+{
+	int		test;
+	int		nbr_one;
+	int		nbr_two;
+	t_list	*list_a;
+	t_list	*list_b;
+
+	if (!stack_a || !stack_b)
+		return ;
+	list_a = stack_a;
+	list_b = stack_b;
+	test = 0;
+	while (list_a && list_a->data)
+	{
+		nbr_one = ft_atoi((char *)list_a->data);
+		if (list_b && list_b->data)
+		{
+			nbr_two = ft_atoi((char *)list_b->data);
+			list_b = list_b->next;
+			test = 1;
+		}
+		list_a = list_a->next;
+		ft_printf(RESET CYAN"|");
+		ft_printf(RESET RED"	%d", nbr_one);
+		ft_printf(RESET CYAN"	    |");
+		if (test)
+		{
+			ft_printf(RESET BLUE"		%d", nbr_two);
+			ft_printf(RESET CYAN"	  |\n");
+		}
+		else
+			ft_printf(RESET CYAN"		 	  |\n");
+		test = 0;
+	}
+}
+
 void		test(t_list **stack_a, t_list **stack_b)
 {
-	ft_printf(RESET RED"A : Before swap \n");
-	ft_list_foreach(*stack_a, print_linked_list);
-	ft_printf(RESET CYAN"---------\n");
-	ft_printf(RESET BLUE"B : Before swap \n");
-	ft_list_foreach(*stack_b, print_linked_list);
+	ft_printf(RESET CYAN"|---------------Before swap---------------|\n");
+	ft_printf(RESET CYAN"|");
+	ft_printf(RESET RED"	A");
+	ft_printf(RESET CYAN"	    |");
+	ft_printf(RESET BLUE"		B");
+	ft_printf(RESET CYAN"	  |\n");
+	print_both(*stack_a, *stack_b);
+	ft_printf(RESET CYAN"|---------------Operations----------------|\n");
 	sort(stack_a, stack_b);
-	ft_printf(RESET CYAN"---------\n");
-	ft_printf(RESET RED"A : After swap \n");
-	ft_list_foreach(*stack_a, print_linked_list);
-	ft_printf(RESET CYAN"---------\n");
-	ft_printf(RESET BLUE"B : After swap \n");
-	ft_list_foreach(*stack_b, print_linked_list);
+	ft_printf(RESET CYAN"|---------------After swap----------------|\n");
+	print_both(*stack_a, *stack_b);
+	ft_printf(RESET CYAN"|-----------------------------------------|\n");
+}
+
+int			sorted(t_list *stack)
+{
+	t_list	*list;
+	int		nbr_one;
+	int		nbr_two;
+
+	list = stack;
+	while (list && list->data && list->next && list->next->data)
+	{
+		nbr_one = ft_atoi((char *)list->data);
+		nbr_two = ft_atoi((char *)list->next->data);
+		if (nbr_one - nbr_two > 0)
+			return (1);
+		list = list->next;
+	}
+	ft_printf("Sorted!\n");
+	return (0);
 }
 
 /*
@@ -44,11 +118,13 @@ void		test(t_list **stack_a, t_list **stack_b)
 ** but it's not that important
 */
 
-void		sort(t_list **stack_a, t_list **stack_b)
+int			sort(t_list **stack_a, t_list **stack_b)
 {
 	int		len;
 	int		i;
 
+	if (!sorted(*stack_a))
+		return (0);
 	len = ft_list_size(*stack_a);
 	len = len / 2;
 	i = 0;
@@ -57,7 +133,18 @@ void		sort(t_list **stack_a, t_list **stack_b)
 		push(stack_b, stack_a, 2);
 		i++;
 	}
-	ft_printf("size : %d\n", ft_list_size(*stack_a));
+	sa
+	sb
+	ss
+	pa
+	pb
+	ra
+	rb
+	rr
+	rra
+	rrb
+	rrr
+	return (1);
 }
 
 /*

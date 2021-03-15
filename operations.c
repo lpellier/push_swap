@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:43:13 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/12 17:13:18 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:26:15 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void		swap(t_list *stack, int operation)
 	stack->data = stack->next->data;
 	stack->next->data = tmp;
 	if (operation == 1)
-		ft_printf("sa\n");
+		ft_printf("|		   sa			  |\n");
 	else if (operation == 2)
-		ft_printf("sb\n");
+		ft_printf("|		   sb			  |\n");
 	else
 		return ;
 }
@@ -35,7 +35,7 @@ void		swap_both(t_list *stack_a, t_list *stack_b)
 {
 	swap(stack_a, 0);
 	swap(stack_b, 0);
-	ft_printf("ss\n");
+	ft_printf("|		   ss			  |\n");
 }
 
 /*
@@ -53,9 +53,9 @@ void		push(t_list **stack_receiver, t_list **stack_donor, int operation)
 	ft_list_push_front(stack_receiver, (*stack_donor)->data);
 	*stack_donor = (*stack_donor)->next;
 	if (operation == 1)
-		ft_printf("pa\n");
+		ft_printf("|		   pa	  	    	  |\n");
 	else if (operation == 2)
-		ft_printf("pb\n");
+		ft_printf("|		   pb		     	  |\n");
 }
 
 void		rotate(t_list *stack, int operation)
@@ -71,9 +71,9 @@ void		rotate(t_list *stack, int operation)
 		stack = stack->next;
 	}
 	if (operation == 1)
-		ft_printf("ra\n");
+		ft_printf("|		   ra			  |\n");
 	else if (operation == 2)
-		ft_printf("rb\n");
+		ft_printf("|		   rb			  |\n");
 	else
 		return ;
 }
@@ -82,7 +82,7 @@ void		rotate_both(t_list *stack_a, t_list *stack_b)
 {
 	rotate(stack_a, 0);
 	rotate(stack_b, 0);
-	ft_printf("rr\n");
+	ft_printf("|		   rr			  |\n");
 }
 
 void		reverse_rotate(t_list *stack, int operation)
@@ -100,9 +100,9 @@ void		reverse_rotate(t_list *stack, int operation)
 		i++;
 	}
 	if (operation == 1)
-		ft_printf("rra\n");
+		ft_printf("|		   rra			  |\n");
 	else if (operation == 2)
-		ft_printf("rrb\n");
+		ft_printf("|		   rrb			  |\n");
 	else
 		return ;
 }
@@ -111,5 +111,5 @@ void		reverse_rotate_both(t_list *stack_a, t_list *stack_b)
 {
 	reverse_rotate(stack_a, 0);
 	reverse_rotate(stack_b, 0);
-	ft_printf("rrr\n");
+	ft_printf("|		   rrr			  |\n");
 }

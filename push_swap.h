@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:55:52 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/12 16:24:09 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:23:32 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@
 # define BLUE			"\033[34m"
 # define CYAN			"\x1b[36m"
 # define RESET			"\x1b[0m"
+
+# define sa				swap(*stack_a, 1);
+# define sb				swap(*stack_b, 2);
+# define ss				swap_both(*stack_a, *stack_b);
+# define pa				push(stack_a, stack_b, 1);
+# define pb				push(stack_b, stack_a, 2);
+# define ra				rotate(*stack_a, 1);
+# define rb				rotate(*stack_b, 2);
+# define rr				rotate_both(*stack_a, *stack_b);
+# define rra			reverse_rotate(*stack_a, 1);
+# define rrb			reverse_rotate(*stack_b, 2);
+# define rrr			reverse_rotate_both(*stack_a, *stack_b);
 
 # define TRUE			1
 # define FALSE			0
@@ -37,7 +49,7 @@ void					rotate_both(t_list *stack_a, t_list *stack_b);
 void					reverse_rotate(t_list *stack, int operation);
 void					reverse_rotate_both(t_list *stack_a, t_list *stack_b);
 
-void					sort(t_list **stack_a, t_list **stack_b);
+int						sort(t_list **stack_a, t_list **stack_b);
 
 void					free_stack(void *data);
 void					print_linked_list(void *data);
