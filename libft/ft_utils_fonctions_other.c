@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_utils_fonctions_other.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tefroiss <tefroiss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 09:26:11 by lpellier          #+#    #+#             */
-/*   Updated: 2021/04/03 20:23:00 by tefroiss         ###   ########.fr       */
+/*   Created: 2021/04/07 13:32:55 by tefroiss          #+#    #+#             */
+/*   Updated: 2021/04/26 12:51:35 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	manque_de_place(t_printf *printf, int padlength)
 {
-	int	i;
-
-	if (s == NULL)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	if (printf->padding != 1 || (printf->number == 1 && \
+		printf->precision != -1))
+		while (padlength--)
+			ft_putchar_fd(' ', STDERR_FILENO);
+	else
+		while (padlength--)
+			ft_putchar_fd('0', STDERR_FILENO);
 }

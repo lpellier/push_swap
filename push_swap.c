@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:57:54 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/13 15:24:18 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:56:54 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void    print_both(t_list *stack_a, t_list *stack_b)
 	list_a = stack_a;
 	list_b = stack_b;
 	test = 0;
-	while (list_a && list_a->data)
+	while (list_a && list_a->data && list_a->next != stack_a)
 	{
 		nbr_one = ft_atoi((char *)list_a->data);
-		if (list_b && list_b->data)
+		if (list_b && list_b->data && list_b->next != stack_b)
 		{
 			nbr_two = ft_atoi((char *)list_b->data);
 			list_b = list_b->next;
@@ -72,6 +72,23 @@ void    print_both(t_list *stack_a, t_list *stack_b)
 			ft_printf(RESET CYAN"		 	  |\n");
 		test = 0;
 	}
+	nbr_one = ft_atoi((char *)list_a->data);
+	if (list_b && list_b->data)
+	{
+		nbr_two = ft_atoi((char *)list_b->data);
+		test = 1;
+	}
+	ft_printf(RESET CYAN"|");
+	ft_printf(RESET RED"	%d", nbr_one);
+	ft_printf(RESET CYAN"	    |");
+	if (test)
+	{
+		ft_printf(RESET BLUE"		%d", nbr_two);
+		ft_printf(RESET CYAN"	  |\n");
+	}
+	else
+		ft_printf(RESET CYAN"		 	  |\n");
+	test = 0;
 }
 
 void		test(t_list **stack_a, t_list **stack_b)
@@ -121,29 +138,29 @@ int			sorted(t_list *stack)
 int			sort(t_list **stack_a, t_list **stack_b)
 {
 	int		len;
-	int		i;
+	// int		i;
 
+	(void)*stack_b;
 	if (!sorted(*stack_a))
 		return (0);
 	len = ft_list_size(*stack_a);
-	len = len / 2;
-	i = 0;
-	while (i < len)
-	{
-		push(stack_b, stack_a, 2);
-		i++;
-	}
-	sa
-	sb
-	ss
-	pa
+	// i = 0;
+	// while (i < len / 2)
+	// {
+	// 	push(stack_b, stack_a, 2);
+	// 	i++;
+	// }
+	// sa
+	// sb
+	// ss
+	// pa
 	pb
-	ra
-	rb
-	rr
-	rra
-	rrb
-	rrr
+	// ra
+	// rb
+	// rr
+	// rra
+	// rrb
+	// rrr
 	return (1);
 }
 
@@ -161,10 +178,12 @@ int			main(int ac, char **av)
 		ft_printf("Error\n");
 		exit (1);
 	}
-	stack_a = ft_create_elem(ft_strdup(av[1]));
+	stack_a = NULL;
 	stack_b = ft_create_elem(NULL);
-	if (ac >= 3)
-		init_linked_list(stack_a, av);
+	stack_b->next = stack_b;
+	stack_b->prev = stack_b;
+	if (ac >= 2)
+		init_linked_list(&stack_a, av);
 	test(&stack_a, &stack_b);
 	ft_list_clear(stack_a, free_stack);
 	ft_list_clear(stack_b, free_stack);

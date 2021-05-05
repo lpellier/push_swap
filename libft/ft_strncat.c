@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uintlen.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tefroiss <tefroiss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 12:35:26 by lpellier          #+#    #+#             */
-/*   Updated: 2021/04/06 10:49:52 by tefroiss         ###   ########.fr       */
+/*   Created: 2021/03/29 12:22:32 by lpellier          #+#    #+#             */
+/*   Updated: 2021/04/06 10:52:38 by tefroiss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_uintlen(unsigned long n)
+void	ft_strncat(char *dest, char *src, int nb)
 {
-	int	count;
+	int	i;
+	int	j;
 
-	count = 1;
-	while (n >= 10)
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0' && j < nb)
 	{
-		n /= 10;
-		count++;
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	return (count);
+	dest[i] = '\0';
 }

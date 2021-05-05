@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_int_hexmin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tefroiss <tefroiss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 14:17:14 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 18:00:36 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/04/06 17:13:26 by tefroiss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_int_hexmin(long n, char *tab)
 	{
 		i = 0;
 		taille = digit_count(n, 16);
-		if (!(res = (char *)ft_calloc(1, (sizeof(char) * taille + 1))))
+		if (ft_calloc((void **)&res, taille + 1, (sizeof(char))))
 			return (NULL);
 		taille--;
 		while (n)

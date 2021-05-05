@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uintlen.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tefroiss <tefroiss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 12:35:26 by lpellier          #+#    #+#             */
-/*   Updated: 2021/04/06 10:49:52 by tefroiss         ###   ########.fr       */
+/*   Created: 2021/03/29 12:21:50 by lpellier          #+#    #+#             */
+/*   Updated: 2021/04/06 10:48:56 by tefroiss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_uintlen(unsigned long n)
+void	ft_strcpy(char *dest, char *src)
 {
-	int	count;
+	int	i;
 
-	count = 1;
-	while (n >= 10)
+	i = 0;
+	while (src[i] != '\0')
 	{
-		n /= 10;
-		count++;
+		dest[i] = src[i];
+		i++;
 	}
-	return (count);
+	dest[i] = '\0';
 }

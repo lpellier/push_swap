@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 12:53:09 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/13 11:54:53 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:37:25 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void		print_linked_list(void *data)
 	}
 }
 
-int			init_linked_list(t_list *a, char **av)
+int			init_linked_list(t_list **a, char **av)
 {
 	int		i;
 
-	i = 2;
+	i = 1;
 	while (av[i])
 	{
-		ft_list_push_back(&a, ft_strdup(av[i]));
+		ft_list_push_back(a, ft_strdup(av[i]));
 		i++;
 	}
 	return (0);
@@ -67,13 +67,8 @@ int			init_linked_list(t_list *a, char **av)
 
 void		free_stack(void *data)
 {
-	char	*ptr;
+	char *ptr;
 
 	ptr = (char *)data;
-	free(ptr);
+	secure_free(ptr);
 }
-
-// int			compare_value(int a, int b)
-// {
-// 	return (a - b);
-// }

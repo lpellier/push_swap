@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uintlen.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tefroiss <tefroiss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 12:35:26 by lpellier          #+#    #+#             */
-/*   Updated: 2021/04/06 10:49:52 by tefroiss         ###   ########.fr       */
+/*   Created: 2021/03/24 11:20:17 by lpellier          #+#    #+#             */
+/*   Updated: 2021/03/24 11:21:53 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_uintlen(unsigned long n)
-{
-	int	count;
+#include "libft.h"
 
-	count = 1;
-	while (n >= 10)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
+int	ft_putchar(int c)
+{
+	write(STDOUT_FILENO, &c, 1);
+	return (EXIT_SUCCESS);
 }

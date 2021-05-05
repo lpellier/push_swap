@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:43:13 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/13 15:26:15 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:16:04 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		swap_both(t_list *stack_a, t_list *stack_b)
 
 void		push(t_list **stack_receiver, t_list **stack_donor, int operation)
 {
+	t_list	*tmp;
 	int		len_donor;
 
 	len_donor = ft_list_size(*stack_donor);
@@ -52,6 +53,7 @@ void		push(t_list **stack_receiver, t_list **stack_donor, int operation)
 		return ;
 	ft_list_push_front(stack_receiver, (*stack_donor)->data);
 	*stack_donor = (*stack_donor)->next;
+	(*stack_donor)->prev = (*stack_donor)->prev->prev;
 	if (operation == 1)
 		ft_printf("|		   pa	  	    	  |\n");
 	else if (operation == 2)

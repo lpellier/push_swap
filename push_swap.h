@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:55:52 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/13 15:23:32 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:36:46 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 typedef struct s_list
 {
 		struct s_list	*next;
+		struct s_list	*prev;
 		void			*data;
 }						t_list;
 
@@ -53,7 +54,7 @@ int						sort(t_list **stack_a, t_list **stack_b);
 
 void					free_stack(void *data);
 void					print_linked_list(void *data);
-int						init_linked_list(t_list *a, char **av);
+int						init_linked_list(t_list **a, char **av);
 int						error_in_args(char **av);
 int						is_numeric(int c);
 

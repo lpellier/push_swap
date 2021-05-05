@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:45:57 by lpellier          #+#    #+#             */
-/*   Updated: 2021/03/13 15:18:24 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:46:18 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list  *ft_create_elem(void *data)
 		return (NULL);
 	res->data = data;
 	res->next = NULL;
+	res->prev = NULL;
 	return (res);
 }
 
@@ -31,10 +32,15 @@ void   ft_list_push_front(t_list **begin_list, void *data)
 	{
 		list = ft_create_elem(data);
 		list->next = *begin_list;
+		list->prev = ft_list_at(*begin_list, ft_list_size(*begin_list));
 		*begin_list = list;
 	}
 	else
+	{
 		*begin_list = ft_create_elem(data);
+		(*begin_list)->next = *begin_list;
+		(*begin_list)->prev = *begin_list;
+	}
 }
 
 int             ft_list_size(t_list *list)
@@ -44,7 +50,7 @@ int             ft_list_size(t_list *list)
 
 	i = 0;
 	current = list;
-	while (current && current->data)
+	while (current && current->data && current->next != list)
 	{
 		i++;
 		current = current->next;
@@ -59,12 +65,18 @@ void    ft_list_push_back(t_list **begin_list, void *data)
 	if (!(*begin_list))
 	{
 		*begin_list = ft_create_elem(data);
-		return ;
+		(*begin_list)->next = *begin_list;
+		(*begin_list)->prev = *begin_list;
 	}
-	list = *begin_list;
-	while (list->next)
-		list = list->next;
-	list->next = ft_create_elem(data);
+	else
+	{
+		list = *begin_list;
+		while (list->next != *begin_list)
+			list = list->next;
+		list->next = ft_create_elem(data);
+		list->next->next = *begin_list;
+		list->next->prev = list;
+	}
 }
 
 t_list  *ft_list_at(t_list *begin_list, unsigned int nbr)
@@ -89,7 +101,7 @@ t_list  *ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)())
 	t_list   *el;
 
 	el = begin_list;
-	while (el)
+	while (el->next != begin_list)
 	{
 		if (cmp(el->data, data_ref) == 0)
 			return (el);
@@ -98,43 +110,18 @@ t_list  *ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)())
 	return (NULL);
 }
 
-void    ft_list_remove_if(t_list **begin_list, void *data_ref,
-			int (*cmp)(), void (*free_fct)(void *))
-{
-	t_list   *tmp;
-	t_list   *el;
-
-	while (*begin_list && !cmp((*begin_list)->data, data_ref))
-	{
-		tmp = *begin_list;
-		*begin_list = (*begin_list)->next;
-		free_fct(tmp->data);
-		free(tmp);
-	}
-	el = *begin_list;
-	while (el && el->next)
-	{
-		if (!cmp(el->next->data, data_ref))
-		{
-			tmp = el->next;
-			el->next = tmp->next;
-			free_fct(tmp->data);
-			free(tmp);
-		}
-		el = el->next;
-	}
-}
-
 void    ft_list_clear(t_list *begin_list, void (*free_fct)(void *))
 {
+	t_list	*list;
 	t_list   *ptr;
 
-	while (begin_list)
+	list = begin_list;
+	while (list->next != begin_list)
 	{
-		ptr = begin_list->next;
-		free_fct(begin_list->data);
-		free(begin_list);
-		begin_list = ptr;
+		ptr = list->next;
+		free_fct(list->data);
+		free(list);
+		list = ptr;
 	}
-	begin_list = NULL;
+	list = NULL;
 }
