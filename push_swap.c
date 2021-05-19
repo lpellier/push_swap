@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:57:54 by lpellier          #+#    #+#             */
-/*   Updated: 2021/05/05 12:56:54 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:18:08 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,173 +19,167 @@
 ** into a linked list, which i'll be able to modify at will.
 */
 
-// void		test(t_list **stack_a, t_list **stack_b)
-// {
-// 	ft_printf(RESET CYAN"---------------\n");
-// 	ft_printf(RESET RED"A : Before swap \n");
-// 	ft_list_foreach(*stack_a, print_linked_list);
-// 	ft_printf(RESET CYAN"---------------\n");
-// 	ft_printf(RESET BLUE"B : Before swap \n");
-// 	ft_list_foreach(*stack_b, print_linked_list);
-// 	sort(stack_a, stack_b);
-// 	ft_printf(RESET CYAN"---------------\n");
-// 	ft_printf(RESET RED"A : After swap \n");
-// 	ft_list_foreach(*stack_a, print_linked_list);
-// 	ft_printf(RESET CYAN"---------------\n");
-// 	ft_printf(RESET BLUE"B : After swap \n");
-// 	ft_list_foreach(*stack_b, print_linked_list);
-// 	ft_printf(RESET CYAN"---------------\n");
-// }
-
-void    print_both(t_list *stack_a, t_list *stack_b)
+int		int_lint(int *lint)
 {
-	int		test;
-	int		nbr_one;
-	int		nbr_two;
-	t_list	*list_a;
-	t_list	*list_b;
+	int		i;
 
-	if (!stack_a || !stack_b)
-		return ;
-	list_a = stack_a;
-	list_b = stack_b;
-	test = 0;
-	while (list_a && list_a->data && list_a->next != stack_a)
+	i = 0;
+	while (lint[i] != -1)
+		i++;
+	return (i);
+}
+
+void    set_lint(int *lint)
+{
+	int             i;
+
+	i = 0;
+	while (i < LINE_MAX)
 	{
-		nbr_one = ft_atoi((char *)list_a->data);
-		if (list_b && list_b->data && list_b->next != stack_b)
-		{
-			nbr_two = ft_atoi((char *)list_b->data);
-			list_b = list_b->next;
-			test = 1;
-		}
-		list_a = list_a->next;
-		ft_printf(RESET CYAN"|");
-		ft_printf(RESET RED"	%d", nbr_one);
-		ft_printf(RESET CYAN"	    |");
-		if (test)
-		{
-			ft_printf(RESET BLUE"		%d", nbr_two);
-			ft_printf(RESET CYAN"	  |\n");
-		}
+		lint[i] = -1;
+		i++;
+	}
+}
+
+void    intcat(int *dest, int start, int *src)
+{
+	int             i;
+
+	i = 0;
+	while (src[i] != - 1)
+	{
+		dest[start] = src[i];
+		i++;
+		start++;
+	}
+}
+
+int             *sublint(int *src, int index)
+{
+	int             i;
+	int     *cpy;
+
+	if (ft_calloc((void **)&cpy, LINE_MAX, sizeof(int)))
+			return (NULL);
+	set_lint(cpy);
+	i = 0;
+	while (src[index] != - 1)
+	{
+		cpy[i] = src[index];
+		index++;
+		i++;
+	}
+	return (cpy);
+}
+
+void    add_int(int *dest, int key, int index)
+{
+	int             *tmp;
+
+	tmp = sublint(dest, index);
+	dest[index] = key;
+	index++;
+	intcat(dest, index, tmp);
+	secure_free(tmp);
+}
+
+void    remove_int(int  *lint, int index)
+{
+	while (lint[index] != -1)
+	{
+		lint[index] = lint[index + 1];
+		index++;
+	}
+}
+
+
+void		print_tab(int *stack_a, int *stack_b)
+{
+	int		i;
+	
+	ft_printf(CYAN"------------------------\n"RESET);
+	ft_printf(CYAN"|     "RESET);
+	ft_printf(RED"A");
+	ft_printf(CYAN"     |"RESET);
+	ft_printf(CYAN"     B     |\n"RESET);
+	ft_printf(CYAN"|-----------------------|\n"RESET);
+	i = 0;
+	while (stack_a[i] != - 1)
+	{
+		ft_printf(CYAN"|     "RESET);
+		ft_printf(RED"%d     "RESET, stack_a[i]);
+		ft_printf(CYAN"|"RESET);
+		if (stack_b[i] != -1)
+			ft_printf(CYAN"     %d     |"RESET, stack_b[i]);
 		else
-			ft_printf(RESET CYAN"		 	  |\n");
-		test = 0;
+			ft_printf(CYAN"           |"RESET);
+		ft_printf("\n");
+		i++;
 	}
-	nbr_one = ft_atoi((char *)list_a->data);
-	if (list_b && list_b->data)
+	while (stack_b[i] != - 1)
 	{
-		nbr_two = ft_atoi((char *)list_b->data);
-		test = 1;
+		ft_printf(CYAN"      %d      /n"RESET, stack_b[i]);
+		i++;
 	}
-	ft_printf(RESET CYAN"|");
-	ft_printf(RESET RED"	%d", nbr_one);
-	ft_printf(RESET CYAN"	    |");
-	if (test)
-	{
-		ft_printf(RESET BLUE"		%d", nbr_two);
-		ft_printf(RESET CYAN"	  |\n");
-	}
-	else
-		ft_printf(RESET CYAN"		 	  |\n");
-	test = 0;
+	ft_printf(CYAN"------------------------\n"RESET);
 }
 
-void		test(t_list **stack_a, t_list **stack_b)
+int			smallest(int *stack)
 {
-	ft_printf(RESET CYAN"|---------------Before swap---------------|\n");
-	ft_printf(RESET CYAN"|");
-	ft_printf(RESET RED"	A");
-	ft_printf(RESET CYAN"	    |");
-	ft_printf(RESET BLUE"		B");
-	ft_printf(RESET CYAN"	  |\n");
-	print_both(*stack_a, *stack_b);
-	ft_printf(RESET CYAN"|---------------Operations----------------|\n");
-	sort(stack_a, stack_b);
-	ft_printf(RESET CYAN"|---------------After swap----------------|\n");
-	print_both(*stack_a, *stack_b);
-	ft_printf(RESET CYAN"|-----------------------------------------|\n");
-}
+	int		i;
+	int		ret_nbr;
+	int		ret_pos;
 
-int			sorted(t_list *stack)
-{
-	t_list	*list;
-	int		nbr_one;
-	int		nbr_two;
-
-	list = stack;
-	while (list && list->data && list->next && list->next->data)
+	i = 0;
+	ret_nbr = __INT_MAX__;
+	ret_pos = 0;
+	while (stack[i] != -1)
 	{
-		nbr_one = ft_atoi((char *)list->data);
-		nbr_two = ft_atoi((char *)list->next->data);
-		if (nbr_one - nbr_two > 0)
-			return (1);
-		list = list->next;
+		if (stack[i] < ret_nbr)
+		{
+			ret_nbr = stack[i];
+			ret_pos = i;
+		}
+		i++;
 	}
-	ft_printf("Sorted!\n");
-	return (0);
+	return (ret_pos);
 }
 
-/*
-** here's the sorting algorithm
-** i'm thinking some sort of quicksort algo even though
-** we only have two piles.
-** so maybe divide the list into the two piles, then sort both
-** i should add something to make sure i don't do ra then rb but instead rr
-** but it's not that important
-*/
+void		three_case(int *stack_a)
+{
+	int		small;
+	
+	small = smallest(stack_a);
+	
+}
 
-int			sort(t_list **stack_a, t_list **stack_b)
+void		sort_stacks(int *stack_a, int *stack_b)
 {
 	int		len;
-	// int		i;
 
-	(void)*stack_b;
-	if (!sorted(*stack_a))
-		return (0);
-	len = ft_list_size(*stack_a);
-	// i = 0;
-	// while (i < len / 2)
-	// {
-	// 	push(stack_b, stack_a, 2);
-	// 	i++;
-	// }
-	// sa
-	// sb
-	// ss
-	// pa
-	pb
-	// ra
-	// rb
-	// rr
-	// rra
-	// rrb
-	// rrr
-	return (1);
+	len = int_lint(stack_a);
+	if (len == 3)
+		three_case(stack_a);
+	// else if (len == 5)
 }
-
-/*
-** issue with bstack's len
-*/
 
 int			main(int ac, char **av)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	int		*stack_a;
+	int		*stack_b;
 
-	if (ac <= 1 || error_in_args(av))
+	if (ac <= 1 || error_in_args(av) || ft_calloc((void **)&stack_a, \
+		LINE_MAX, sizeof(int)) || ft_calloc((void **)&stack_b, LINE_MAX, sizeof(int)))
 	{
 		ft_printf("Error\n");
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
-	stack_a = NULL;
-	stack_b = ft_create_elem(NULL);
-	stack_b->next = stack_b;
-	stack_b->prev = stack_b;
+	set_lint(stack_a);
+	set_lint(stack_b);
 	if (ac >= 2)
-		init_linked_list(&stack_a, av);
-	test(&stack_a, &stack_b);
-	ft_list_clear(stack_a, free_stack);
-	ft_list_clear(stack_b, free_stack);
+		init_tab(stack_a, av);
+	print_tab(stack_a, stack_b);
+	sort_stacks(stack_a, stack_b);
+	print_tab(stack_a, stack_b);
 	exit(0);
 }

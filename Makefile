@@ -20,8 +20,7 @@ CC = clang
 
 SRCS_PS = push_swap.c \
 			operations.c \
-			utils.c \
-			linked_lists.c
+			utils.c 
 OBJS_PS = $(SRCS_PS:.c=.o)
 
 # SRCS_C = checker.c \

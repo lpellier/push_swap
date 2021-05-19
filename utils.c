@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 12:53:09 by lpellier          #+#    #+#             */
-/*   Updated: 2021/05/05 12:37:25 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 16:29:40 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,16 @@ int			error_in_args(char **av)
 	return (0);
 }
 
-void		print_linked_list(void *data)
-{
-	char	*ptr;
-	int		c;
-
-	ptr = (char *)data;
-	if (ptr)
-	{
-		c = ft_atoi(ptr);
-		ft_printf("%d\n", c);
-	}
-}
-
-int			init_linked_list(t_list **a, char **av)
+int			init_tab(int *a, char **av)
 {
 	int		i;
 
 	i = 1;
 	while (av[i])
 	{
-		ft_list_push_back(a, ft_strdup(av[i]));
+		a[i - 1] = ft_atoi(av[i]);
 		i++;
 	}
 	return (0);
 }
 
-void		free_stack(void *data)
-{
-	char *ptr;
-
-	ptr = (char *)data;
-	secure_free(ptr);
-}

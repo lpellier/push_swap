@@ -6,36 +6,34 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:43:13 by lpellier          #+#    #+#             */
-/*   Updated: 2021/05/05 15:16:04 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/05/05 17:39:22 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		swap(t_list *stack, int operation)
+void		swap(int *stack, int operation)
 {
-	char	*tmp;
-	int		len;
+	int		tmp;
 
-	len = ft_list_size(stack);
-	if (len == 0 || len == 1)
+	if (stack[0] == -1 || stack[1] == -1)
 		return ;
-	tmp = stack->data;
-	stack->data = stack->next->data;
-	stack->next->data = tmp;
+	tmp = stack[0];
+	stack[0] = stack[1];
+	stack[1] = tmp;
 	if (operation == 1)
-		ft_printf("|		   sa			  |\n");
+		ft_printf("sa\n");
 	else if (operation == 2)
-		ft_printf("|		   sb			  |\n");
+		ft_printf("sb\n");
 	else
 		return ;
 }
 
-void		swap_both(t_list *stack_a, t_list *stack_b)
+void		swap_both(int *stack_a, int *stack_b)
 {
 	swap(stack_a, 0);
 	swap(stack_b, 0);
-	ft_printf("|		   ss			  |\n");
+	ft_printf("ss\n");
 }
 
 /*
@@ -43,75 +41,63 @@ void		swap_both(t_list *stack_a, t_list *stack_b)
 ** it seems i don't need to since i'm doing it at the end of the program
 */
 
-void		push(t_list **stack_receiver, t_list **stack_donor, int operation)
+void		push(int *stack_receiver, int *stack_donor, int operation)
 {
-	t_list	*tmp;
-	int		len_donor;
+	int		tmp;
 
-	len_donor = ft_list_size(*stack_donor);
-	if (!len_donor || !((*stack_donor)->data))
-		return ;
-	ft_list_push_front(stack_receiver, (*stack_donor)->data);
-	*stack_donor = (*stack_donor)->next;
-	(*stack_donor)->prev = (*stack_donor)->prev->prev;
+	tmp = stack_donor[0];
+	remove_int(stack_donor, 0);
+	add_int(stack_receiver, tmp, 0);
 	if (operation == 1)
-		ft_printf("|		   pa	  	    	  |\n");
+		ft_printf("pa\n");
 	else if (operation == 2)
-		ft_printf("|		   pb		     	  |\n");
+		ft_printf("pb\n");
 }
 
-void		rotate(t_list *stack, int operation)
+void		rotate(int *stack, int operation)
 {
+	int		tmp;
 	int		len;
 
-	len = ft_list_size(stack);
-	if (len <= 1)
-		return ;
-	while (stack)
-	{
-		swap(stack, 0);
-		stack = stack->next;
-	}
+	tmp = stack[0];
+	remove_int(stack, 0);
+	len = int_lint(stack) - 1;
+	add_int(stack, tmp, len);
 	if (operation == 1)
-		ft_printf("|		   ra			  |\n");
+		ft_printf("ra\n");
 	else if (operation == 2)
-		ft_printf("|		   rb			  |\n");
+		ft_printf("rb\n");
 	else
 		return ;
 }
 
-void		rotate_both(t_list *stack_a, t_list *stack_b)
+void		rotate_both(int *stack_a, int *stack_b)
 {
 	rotate(stack_a, 0);
 	rotate(stack_b, 0);
-	ft_printf("|		   rr			  |\n");
+	ft_printf("rr\n");
 }
 
-void		reverse_rotate(t_list *stack, int operation)
+void		reverse_rotate(int *stack, int operation)
 {
+	int		tmp;
 	int		len;
-	int		i;
 
-	len = ft_list_size(stack);
-	i = 0;
-	if (len <= 1)
-		return ;
-	while (i < len - 1)
-	{
-		rotate(stack, 0);
-		i++;
-	}
+	len = int_lint(stack) - 1;
+	tmp = stack[len];
+	remove_int(stack, len);
+	add_int(stack, tmp, 0);
 	if (operation == 1)
-		ft_printf("|		   rra			  |\n");
+		ft_printf("rra\n");
 	else if (operation == 2)
-		ft_printf("|		   rrb			  |\n");
+		ft_printf("rrb\n");
 	else
 		return ;
 }
 
-void		reverse_rotate_both(t_list *stack_a, t_list *stack_b)
+void		reverse_rotate_both(int *stack_a, int *stack_b)
 {
 	reverse_rotate(stack_a, 0);
 	reverse_rotate(stack_b, 0);
-	ft_printf("|		   rrr			  |\n");
+	ft_printf("rrr\n");
 }
