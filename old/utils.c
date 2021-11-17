@@ -5,23 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 16:17:02 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/15 16:17:29 by lpellier         ###   ########.fr       */
+/*   Created: 2021/03/12 12:53:09 by lpellier          #+#    #+#             */
+/*   Updated: 2021/05/05 16:29:40 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "push_swap.h"
 
-int	*		str_to_int(char * string) {
-	int *	ret;
-	
-	if (!(ret = malloc(sizeof(int))))
-		return (NULL);
-
-	*ret = 0;
-	for (int i = 0; string[i]; i++) {
-		*ret = *ret * 10 + (string[i] - 48);
-		// printf("%c -> %d\n", string[i], *ret);
-	}
-	return (ret);
+int			is_numeric(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (0);
+	return (1);
 }
+
+int			error_in_args(char **av)
+{
+	int		i;
+	int		j;
+
+	i = 1;
+	while (av[i])
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if (is_numeric(av[i][j]))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int			init_tab(int *a, char **av)
+{
+	int		i;
+
+	i = 1;
+	while (av[i])
+	{
+		a[i - 1] = ft_atoi(av[i]);
+		i++;
+	}
+	return (0);
+}
+
