@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:11:48 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/19 18:04:01 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:08:55 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,6 @@ void	sorting(t_stack **stack_a, t_stack **stack_b, int size)
 		else
 			sort_stacks(stack_a, stack_b);
 	}
-}
-
-void		print_stack(t_stack * stack) {
-	t_stack * stack_current;
-
-	stack_current = stack;
-	// if (!stack_current) {
-	// 	printf("empty stack\n\n");
-	// 	return ;
-	// }
-	// printf("number : %d\n", stack->nbr_elements);
-	for (int i = 0; i < stack->nbr_elements; i++) {
-		printf("%d ", stack_current->value);
-		stack_current = stack_current->next;
-	}
-	printf("\n");
 }
 
 int	main(int ac, char **av)

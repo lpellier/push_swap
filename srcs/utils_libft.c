@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:04:21 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/19 18:06:13 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:09:23 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ long long	str_to_long(char *string)
 		i++;
 		negative = 1;
 	}
-	while (string[i]) {
+	while (string[i])
+	{
 		ret = ret * 10 + (string[i] - 48);
 		i++;
 	}
@@ -61,7 +62,8 @@ int	str_to_int(char *string)
 		i++;
 		negative = 1;
 	}
-	while (string[i]) {
+	while (string[i])
+	{
 		ret = ret * 10 + (string[i] - 48);
 		i++;
 	}
