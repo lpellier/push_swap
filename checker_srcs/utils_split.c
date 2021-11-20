@@ -6,21 +6,11 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:17:02 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:00:13 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:23:45 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "../include/checker.h"
 
 int	count_words(const char *str, char c)
 {
