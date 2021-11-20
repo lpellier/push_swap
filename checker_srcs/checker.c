@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 18:13:15 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:52:50 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:58:19 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	loop(t_stack **stack_a, t_stack **stack_b, char **line)
 			*line = NULL;
 			free_stack(stack_a);
 			free_stack(stack_b);
-			printf("Error\n");
+			fprintf(stderr, "Error\n");
 			return (EXIT_FAILURE);
 		}
 		respond_cmd(stack_a, stack_b, *line);
