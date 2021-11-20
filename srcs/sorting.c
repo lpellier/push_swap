@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:06:56 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:17:52 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:55:25 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 	int	size;
 	int	i;
 	int	j;
-	int	size_b;
-	int	num;
 
 	size = (*stack_a)->nbr_elements;
 	i = 0;
@@ -119,19 +117,14 @@ void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 		j = 0;
 		while (j < size)
 		{
-			num = (*stack_a)->index_value;
-			if (((num >> i) & 1) == 1)
+			if ((((*stack_a)->index_value >> i) & 1) == 1)
 				rotate(stack_a, 'a');
 			else
 				push(stack_b, stack_a, 'b');
 			j++;
 		}
-		size_b = (*stack_b)->nbr_elements;
-		j = 0;
-		while (j < size_b) {
+		while (*stack_b)
 			push(stack_a, stack_b, 'a');
-			j++;
-		}
 		i++;
 	}
 }

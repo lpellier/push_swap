@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 18:13:15 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:23:39 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:52:50 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	line_error(char *line)
 	return (0);
 }
 
-void	respond_cmd(t_stack ** stack_a, t_stack ** stack_b, char * cmd) {
+void	respond_cmd(t_stack **stack_a, t_stack **stack_b, char *cmd)
+{
 	if (!ft_strcmp(cmd, "sa"))
 		swap(stack_a, 'z');
 	else if (!ft_strcmp(cmd, "sb"))
@@ -50,11 +51,34 @@ void	respond_cmd(t_stack ** stack_a, t_stack ** stack_b, char * cmd) {
 		rreverse_rotate(stack_a, stack_b);
 }
 
-int main(int ac, char **av)
+int	loop(t_stack **stack_a, t_stack **stack_b, char **line)
+{
+	while (get_next_line(0, line))
+	{
+		if (line_error(*line))
+		{
+			free(*line);
+			*line = NULL;
+			free_stack(stack_a);
+			free_stack(stack_b);
+			printf("Error\n");
+			return (EXIT_FAILURE);
+		}
+		respond_cmd(stack_a, stack_b, *line);
+	}
+	if (is_sorted(*stack_a))
+		printf("OK\n");
+	else
+		printf("KO\n");
+	return (EXIT_SUCCESS);
+}
+
+int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	char	**numbers;
+	char	*line;
 	int		size;
 
 	if (main_errors(ac, av, &numbers))
@@ -64,22 +88,11 @@ int main(int ac, char **av)
 		size++;
 	stack_a = init_stack(size, numbers);
 	stack_b = NULL;
-
-	char *line = NULL;
-	while (get_next_line(0, &line)) {
-		if (line_error(line)) {
-			free(line);
-			line = NULL;
-			free_stack(&stack_a);
-			free_stack(&stack_b);
-			printf("arg error\n");
-			exit(EXIT_FAILURE);
-		}
-		respond_cmd(&stack_a, &stack_b, line);
-	}
-	if (is_sorted(stack_a))
-		printf("OK\n");
-	else
-		printf("KO\n");
+	line = NULL;
+	if (loop(&stack_a, &stack_b, &line))
+		exit(EXIT_FAILURE);
+	free(line);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	exit(EXIT_SUCCESS);
 }

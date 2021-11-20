@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:11:48 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:13:15 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:35:12 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@
 // once it's done put everything into a
 // start over with the bit before
 // as you're doing this, sort the actual stack at the same time
-
-void	print_stack(t_stack * stack) {
-	for (int i = 0; i < stack->nbr_elements; i++) {
-		printf("%d ", stack->value);
-		stack = stack->next;
-	}
-	printf("\n");
-}
 
 int	main(int ac, char **av)
 {
