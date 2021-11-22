@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:12:36 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:23:40 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:33:49 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_sorted(t_stack *stack)
 
 	size = stack->nbr_elements;
 	i = 0;
-	while (i < size -1)
+	while (i < size - 1)
 	{
 		if (stack->value > stack->next->value)
 			return (0);
