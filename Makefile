@@ -6,7 +6,7 @@
 #    By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/25 19:17:20 by lucaspellie       #+#    #+#              #
-#    Updated: 2021/11/20 12:32:09 by lpellier         ###   ########.fr        #
+#    Updated: 2021/11/22 12:57:27 by lpellier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ SRCS = srcs/main.c \
 		srcs/main_help.c
 
 SRCS_CHECKER = checker_srcs/checker.c \
-				checker_srcs/get_next_line/get_next_line.c \
-				checker_srcs/get_next_line/get_next_line_utils.c \
+				checker_srcs/gnl/get_next_line.c \
+				checker_srcs/gnl/get_next_line_utils.c \
 				checker_srcs/error_handling.c \
 				checker_srcs/stack_operations.c \
 				checker_srcs/utils_sort.c \

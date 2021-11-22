@@ -6,12 +6,12 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 18:13:15 by lpellier          #+#    #+#             */
-/*   Updated: 2021/11/20 12:58:19 by lpellier         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:57:34 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
-#include "get_next_line/get_next_line.h"
+#include "gnl/get_next_line.h"
 
 int	line_error(char *line)
 {
